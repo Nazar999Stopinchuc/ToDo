@@ -1,0 +1,21 @@
+$breakpoints: (
+  "phone": 560px,
+  "tablet": 768px,
+  "tablet-2": 992px,
+  "desktop": 1230px
+);
+
+%montserrat-400 {
+  font-family: 'Montserrat';
+  font-weight: 400;
+}
+
+%montserrat-500 {
+  font-family: 'Montserrat';
+  font-weight: 500;
+}
+
+%montserrat-700 {
+  font-family: 'Montserrat';
+  font-weight: 700;
+}
