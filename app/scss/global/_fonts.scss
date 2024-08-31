@@ -27,3 +27,14 @@
     url('../fonts/Montserrat-Regular.woff') format('woff');
   font-display: swap;
 }
+
+
+@font-face {
+  font-family: 'Montaga';
+  font-weight: 400;
+  font-style: normal;
+  src:
+    url('../fonts/Montaga-Regular.woff2') format('woff2'),
+    url('../fonts/Montaga-Regular.woff') format('woff');
+  font-display: swap;
+}

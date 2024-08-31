@@ -1,9 +1,38 @@
+html.light {
+  --text-color: #fff;
+  --menu-color: #fff;
+  --akcent-bg-color: rgba(54, 33, 191, 0.65);
+  --akcent-color: #110559;
+  --symbol-color: #21118C;
+}
+
+html.dark {
+  --text-color: #fff;
+  --menu-color: #fff;
+  --akcent-bg-color: rgba(86, 101, 115, 0.65);
+  --akcent-color: #181D26;
+  --symbol-color: #2C3540;
+}
+
+html.eggplant {
+  --text-color: #000000;
+  --menu-color: #fff;
+  --akcent-bg-color: rgba(255, 255, 255, 0.65);
+  --akcent-color: #563831;
+  --symbol-color: #A28B85;
+}
+
 $breakpoints: (
   "phone": 560px,
   "tablet": 768px,
   "tablet-2": 992px,
   "desktop": 1230px
 );
+
+%border {
+  border: 2px solid var(--menu-color);
+  border-radius: 6px;
+}
 
 %montserrat-400 {
   font-family: 'Montserrat';
@@ -18,4 +47,9 @@ $breakpoints: (
 %montserrat-700 {
   font-family: 'Montserrat';
   font-weight: 700;
+}
+
+%Montaga-400 {
+  font-family: 'Montaga';
+  font-weight: 400;
 }

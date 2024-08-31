@@ -14,7 +14,7 @@ body {
   font-size: 16px;
   line-height: 1.2;
   @extend %montserrat-400;
-  color: #333333;
+  color: var(--text-color);
   background-color: transparent;
 }
 
@@ -39,4 +39,20 @@ body {
   max-width: 1210px;
   padding: 0 15px;
   margin: 0 auto;
+}
+
+.none {
+  display: none !important;
+}
+.lock {
+    overflow: hidden;
+}
+
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }

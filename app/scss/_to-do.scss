@@ -1,0 +1,468 @@
+.header {
+  @include adaptiv-value ('padding-top', 30, 20, 1);
+  @include adaptiv-value ('padding-bottom', 40, 20, 1);
+
+  &__title {
+    text-transform: uppercase;
+
+    @include adaptiv-value ('font-size', 60, 20, 1);
+    @extend %Montaga-400;
+  }
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-status {
+  position: fixed;
+  top: -200%;
+  background-color: rgba(#333333, .5);
+  height: 100vh;
+  width: 100%;
+  z-index: 100;
+  transition: top .3s;
+
+  @include mq ('phone') {
+    height: 100vh;
+  }
+
+  &--active {
+    top: 0;
+  }
+
+  &__wrap {
+    display: flex;
+    align-items: center;
+    background-color: var(--akcent-color);
+    @include adaptiv-value ('height', 100, 70, 1);
+    @include adaptiv-value ('padding-left', 40, 20, 1);
+    @include adaptiv-value ('padding-right', 40, 20, 1);
+    gap: 20px;
+
+    @include mq ('phone') {
+      flex-direction: column;
+      align-items: flex-start;
+      height: 100vh;
+      width: 80vw;
+      padding-top: 20px;
+    }
+  }
+
+}
+
+.burger {
+  @include burger (44px, 34px, 3px, var(--menu-color));
+  z-index: 200;
+}
+
+.drop-down {
+  position: relative;
+
+  @include mq ('phone') {
+    width: 100%;
+  }
+
+  &__btn {
+    position: relative;
+    @include adaptiv-value ('padding-left', 15, 10, 1);
+    @include adaptiv-value ('padding-right', 50, 30, 1);
+    @include adaptiv-value ('height', 50, 30, 1);
+    width: 100%;
+    color: var(--menu-color);
+    transition: color .3s;
+    @extend %border;
+
+    &.active {
+      border-bottom: none;
+      border-radius: 6px 6px 0 0;
+    }
+
+    &.active .drop-down__svg {
+      transform: translate(0, -50%) rotateZ(180deg);
+    }
+
+    &:hover {
+      background-color: var(--symbol-color);
+    }
+
+    &:focus-visible {
+      background-color: var(--symbol-color);
+    }
+
+    & * {
+      pointer-events: none;
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      &:hover {
+        background-color: initial;
+      }
+    }
+  }
+
+  &__list {
+    position: absolute;
+    left: 0;
+    @include adaptiv-value ('top', 50, 30, 1);
+    width: 100%;
+    z-index: 100;
+  }
+
+  &__item {
+    cursor: pointer;
+    background-color: var(--akcent-color);
+    color: var(--menu-color);
+    @include adaptiv-value ('padding-left', 15, 10, 1);
+    @include adaptiv-value ('padding-top', 10, 5, 1);
+    @include adaptiv-value ('padding-bottom', 10, 5, 1);
+    @extend %border;
+    border-radius: 0;
+    border-bottom: none;
+    transition: color .3s;
+
+    &:last-child {
+      border: 2px solid var(--menu-color);
+      border-radius: 0 0 6px 6px;
+    }
+
+    &:hover {
+      background-color: var(--symbol-color);
+    }
+
+    & * {
+      pointer-events: none;
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      &:hover {
+        background-color: initial;
+      }
+    }
+  }
+
+
+  &__svg {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%) rotateZ(0deg);
+    right: 10px;
+    fill: none;
+    stroke: var(--menu-color);
+    height: 25px;
+    width: 25px;
+    @include adaptiv-value ('height', 25, 15, 1);
+    @include adaptiv-value ('width', 25, 15, 1);
+    pointer-events: none;
+    transition: stroke .3s, transform .3s, opacity .3s;
+  }
+}
+
+.to-do {
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+  }
+
+  &__lists {
+    display: grid;
+    gap: 20px;
+    @include adaptiv-value ('gap', 20, 10, 1);
+    grid-template-areas:
+      "A B"
+      "A C"
+      "A C"
+    ;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    @include mq('tablet') {
+      grid-template-areas:
+        "A A"
+        "B B"
+        "C C"
+      ;
+    }
+  }
+
+  &__wrap {
+    background-color: var(--akcent-bg-color);
+    border-radius: 12px;
+    padding: 25px;
+    @include adaptiv-value ('padding', 25, 15, 1);
+    overflow: auto;
+
+
+    &--tasks {
+      grid-area: A;
+      min-height: 400px;
+      @include adaptiv-value ('min-height', 400, 200, 1);
+    }
+
+    &--pinned {
+      grid-area: B;
+      @include adaptiv-value ('min-height', 200, 150, 1);
+    }
+
+    &--done {
+      grid-area: C;
+      @include adaptiv-value ('min-height', 200, 150, 1);
+    }
+  }
+
+  &__list-title {
+    text-align: center;
+    color: var(--akcent-color);
+    @include adaptiv-value ('margin-bottom', 20, 10, 1);
+    @include adaptiv-value ('font-size', 36, 22, 1);
+    @extend %montserrat-500;
+  }
+
+  &__title-wrap {
+    position: relative;
+  }
+
+  &__item {
+    cursor: move;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    padding: 5px 10px;
+    @include adaptiv-value ('font-size', 24, 14, 1);
+    border-bottom: 1px solid var(--text-color);
+    @extend %montserrat-500;
+
+    &:not(:last-child) {
+      @include adaptiv-value ('margin-bottom', 20, 10, 1);
+    }
+
+    &::placeholder {
+      @include adaptiv-value ('font-size', 24, 14, 1);
+    }
+
+    &.done {
+      opacity: .5;
+      text-decoration: line-through;
+    }
+
+    &.pinned {
+      box-shadow: 0px -13px 11px -11px rgba(#E30000, .28) inset;
+    }
+  }
+
+  &__task-text {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  &__task-control {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    align-self: flex-start;
+
+    & button {
+      display: block;
+
+      &:hover .to-do__svg {
+        fill: var(--akcent-color);
+      }
+
+      &:active .to-do__svg {
+        opacity: .8;
+      }
+
+      &:focus-visible .to-do__svg {
+        fill: var(--akcent-color);
+      }
+
+      @media (hover: none) and (pointer: coarse) {
+        &:hover .to-do__svg {
+          fill: var(--symbol-color);
+        }
+      }
+    }
+  }
+
+  &__done {
+    &.active .to-do__svg {
+      fill: var(--akcent-color);
+    }
+  }
+
+  &__pinned {
+    &.active .to-do__svg {
+      fill: var(--akcent-color);
+    }
+  }
+
+  &__svg {
+    fill: var(--symbol-color);
+
+    @include adaptiv-value ('height', 30, 20, 1);
+    @include adaptiv-value ('width', 26, 16, 1);
+    transition: fill .2s, opacity .2s;
+    pointer-events: none;
+
+    &--title {
+      fill: var(--akcent-color);
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -40%);
+      left: 0;
+    }
+  }
+}
+
+.form {
+  @include adaptiv-value ('margin-bottom', 40, 20, 1);
+  @include adaptiv-value ('height', 120, 80, 1);
+  background-color: var(--akcent-bg-color);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  @include adaptiv-value ('gap', 20, 10, 1);
+  @include adaptiv-value ('padding', 20, 10, 1);
+  border-radius: 60px;
+
+  &__input {
+    background-color: transparent;
+    border: none;
+    border-right: 1px solid var(--text-color);
+    flex-grow: 1;
+    padding: 20px;
+    @include adaptiv-value ('height', 80, 60, 1);
+    @include adaptiv-value ('font-size', 24, 18, 1);
+    @extend %montserrat-500;
+    resize: none;
+    transition: border-color .2s, box-shadow .2s;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &::placeholder {
+      color: var(--akcent-color);
+      @extend %montserrat-700;
+    }
+  }
+
+  &__btn-send {
+    @include adaptiv-value ('height', 100, 50, 1);
+    @include adaptiv-value ('width', 100, 50, 1);
+
+
+    &:hover .form__btn-svg {
+      stroke: var(--akcent-color);
+    }
+
+    &:active .form__btn-svg {
+      scale: .8;
+    }
+
+    &:focus-visible .form__btn-svg {
+      stroke: var(--akcent-color);
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      &:hover .form__btn-svg {
+        stroke: var(--text-color);
+      }
+    }
+  }
+
+  &__btn-cancele {
+    width: 100%;
+    @include adaptiv-value ('font-size', 36, 18, 1);
+    padding: 10px 0;
+    margin-bottom: 20px;
+    background-color: var(--symbol-color);
+    color: var(--menu-color);
+    border-radius: 6px;
+    @extend %montserrat-500;
+    transition: border-color .2s, color .2s;
+
+    &:hover {
+      color: var(--akcent-color);
+    }
+
+    &:active {
+      opacity: .8;
+    }
+
+    &:focus {
+      border-color: var(--akcent-color);
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      &:hover .form__btn-svg {
+        color: var(--akcent-color);
+      }
+    }
+  }
+
+  &__btn-svg {
+    fill: none;
+    stroke: var(--text-color);
+    @include adaptiv-value ('height', 70, 30, 1);
+    @include adaptiv-value ('width', 70, 30, 1);
+    transition: stroke .3s, scale .3s;
+  }
+}
+
+.error {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+
+
+  &__wrap {
+    @extend %border;
+    background-color: var(--symbol-color);
+    color: var(--bg-color);
+    @include adaptiv-value ('padding', 30, 10, 1);
+    max-width: 80%;
+  }
+
+  &__text {
+    @include adaptiv-value ('font-size', 26, 16, 1);
+    @include adaptiv-value ('margin-bottom', 20, 10, 1);
+    color: var(--menu-color);
+  }
+
+  &__btn {
+    display: block;
+    background-color: var(--akcent-color);
+    border-radius: 6px;
+    border: 3px solid var(--akcent-color);
+    padding: 10px;
+    color: var(--menu-color);
+    @include adaptiv-value ('font-size', 26, 16, 1);
+    margin: 0 auto;
+    transition: color .3s, background-color .3s,
+      scale .3s;
+
+    &:hover {
+      background-color: var(--menu-color);
+      color: var(--akcent-color);
+    }
+
+    &:focus-visible {
+      background-color: var(--menu-color);
+      color: var(--akcent-color);
+    }
+
+    &:active {
+      scale: .9;
+    }
+  }
+}
