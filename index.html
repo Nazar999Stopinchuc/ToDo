@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-  <link rel="manifest" href="images/favicon/site.webmanifest">
+  <!-- <link rel="manifest" href="images/favicon/site.webmanifest"> -->
   <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
@@ -33,6 +33,49 @@
     <section class="to-do">
       <div class="container">
         <div class="to-do__inner">
+
+          <form class="form-date" id="form-date">
+            <p class="form-date__date">Date:</p>
+            <button class="form-date__btn">
+              <svg class="form-date__btn-svg">
+                <use xlink:href="images/sprite.svg#calendar"></use>
+              </svg>
+            </button>
+            <input class="form-date__input none" type="text" id="input-date">
+
+            <div class="calendar none">
+
+              <div class="calendar__head">
+                <p class="calendar__month">01.1999</p>
+                <div class="calendar__control">
+                  <button class="calendar__btn calendar__btn--next" id="next">
+                    <svg class="calendar__btn-svg">
+                      <use xlink:href="images/sprite.svg#arrow"></use>
+                    </svg>
+                  </button>
+                  <button class="calendar__btn calendar__btn--prev" id="prev">
+                    <svg class="calendar__btn-svg">
+                      <use xlink:href="images/sprite.svg#arrow"></use>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <ul class="calendar__week-days">
+                <li class="calendar__week-day lng-mo">Mo</li>
+                <li class="calendar__week-day lng-ty">Ty</li>
+                <li class="calendar__week-day lng-we">We</li>
+                <li class="calendar__week-day lng-th">Th</li>
+                <li class="calendar__week-day lng-fr">Fr</li>
+                <li class="calendar__week-day lng-sa">Sa</li>
+                <li class="calendar__week-day lng-su">Su</li>
+              </ul>
+
+              <ul class="calendar__days">
+      
+              </ul>
+            </div>
+          </form>
 
           <form class="form" id="form">
             <textarea class="form__input" id="input" placeholder="Add item..."></textarea>
@@ -88,14 +131,11 @@
           <input class="drop-down__input none" type="text" id="theme-input">
 
           <ul class="drop-down__list none" id="theme-list">
-            <li class="drop-down__item lng-select_them_light" data-val="light">
-              Light
-            </li>
             <li class="drop-down__item lng-select_them_dark" data-val="dark">
               Dark
             </li>
-            <li class="drop-down__item lng-select_them_eggplant" data-val="eggplant">
-              Serious eggplant
+            <li class="drop-down__item lng-select_them_classical" data-val="classical">
+              Classical
             </li>
           </ul>
         </div>
