@@ -101,13 +101,15 @@ export function initializeCalendar(dateInput, updateTasksCallback, setDateCallba
 
   function renderCalendar() {
     const start = new Date(year, month, 1).getDay();
+    const adjustedStart = start === 0 ? 6 : start - 1;
     const endDate = new Date(year, month + 1, 0).getDate();
     const end = new Date(year, month, endDate).getDay();
+    const adjustedEnd = end === 0 ? 6 : end - 1;
     const endDatePrev = new Date(year, month, 0).getDate();
 
     let datesHtml = "";
 
-    for (let i = start; i > 0; i--) {
+    for (let i = adjustedStart; i > 0; i--) {
       datesHtml += `<li class="inactive">${endDatePrev - i + 1}</li>`;
     }
 
@@ -121,8 +123,8 @@ export function initializeCalendar(dateInput, updateTasksCallback, setDateCallba
       datesHtml += `<li class="active ${className}" data-date="${formatNumber(i)}.${formatNumber(month + 1)}.${year}">${i}</li>`;
     }
 
-    for (let i = end; i < 6; i++) {
-      datesHtml += `<li class="inactive">${i - end + 1}</li>`;
+    for (let i = adjustedEnd; i < 6; i++) {
+      datesHtml += `<li class="inactive">${i - adjustedEnd + 1}</li>`;
     }
 
     dates.innerHTML = datesHtml;
