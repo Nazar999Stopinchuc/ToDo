@@ -1,4 +1,3 @@
-
 export const hash = window.location.hash.slice(1);
 export const langArr = {
   'title': {
@@ -40,22 +39,16 @@ export const langArr = {
     ua: 'Виберіть тему',
   },
 
-  'select_them_light': {
-    en: 'Light',
-    fr: 'Lumière',
-    ua: 'Світла',
-  },
-
   'select_them_dark': {
     en: 'Dark',
     fr: 'Sombre',
     ua: 'Темна',
   },
 
-  'select_them_eggplant': {
-    en: 'Serious eggplant',
-    fr: 'Aubergine sérieuse',
-    ua: 'Серйозний баклажан',
+  'select_them_classical': {
+    en: 'Classical',
+    fr: 'Classique',
+    ua: 'Класична',
   },
 
   'cancele_btn': {
@@ -104,6 +97,54 @@ export const langArr = {
     en: 'Add item...',
     fr: 'Ajouter un article...',
     ua: 'Додайте завдання...',
+  },
+
+  'date': {
+    en: 'Date',
+    fr: 'Date',
+    ua: 'Дата',
+  },
+
+  'mo': {
+    en: 'Mo',
+    fr: 'Lu',
+    ua: 'Пн',
+  },
+
+  'ty': {
+    en: 'Ty',
+    fr: 'Ma',
+    ua: 'Вт',
+  },
+
+  'we': {
+    en: 'We',
+    fr: 'Me',
+    ua: 'Ср',
+  },
+
+  'th': {
+    en: 'Th',
+    fr: 'Je',
+    ua: 'Чт',
+  },
+
+  'fr': {
+    en: 'Fr',
+    fr: 'Ve',
+    ua: 'Пт',
+  },
+
+  'sa': {
+    en: 'Sa',
+    fr: 'Sa',
+    ua: 'Сб',
+  },
+
+  'su': {
+    en: 'Su',
+    fr: 'Di',
+    ua: 'Нд',
   },
 
 };

@@ -2,7 +2,7 @@ import { setTaskLocalStorage, getTaskLocalStorage } from "./utyls";
 
 export const changeTheme = () => {
   const dropDownInput = document.querySelector('#theme-input');
-  const defaultTheme = 'dark';
+  const defaultTheme = 'classical';
   
   function installThem() {
     const сurrentThem = getTaskLocalStorage('theme');

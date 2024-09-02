@@ -1,34 +1,38 @@
-import { langArr, hash } from "./global";
+import { getTaskLocalStorage, setTaskLocalStorage } from "./utyls";
+import { langArr } from "./global";
 
 export const changeLanguage = () => {
   const dropDownInput = document.querySelector('#lang-input');
-  const allLangs = ['en', 'fr', 'ua'];
+  let defaultLang = 'en';
 
-  function installURLLang() {
+  function changeURLLang() {
     let lang = dropDownInput.value;
-    location.href = `${window.location.pathname}#${lang}`;
+    location.hash = lang;
     location.reload();
+
+    setTaskLocalStorage('lang', lang);
+    installLang();
   };
 
   function installLang() {
-    if (!allLangs.includes(hash)) {
-      location.href = `${window.location.pathname}#en`;
-      location.reload();
-    };
+    let currentLang = getTaskLocalStorage('lang');
     
-    document.querySelector('.form__input').placeholder = langArr.form_input[hash]
+    if (!currentLang.length) currentLang = defaultLang;
+
+    if (!location.hash.slice(1)) {
+      location.hash = currentLang; 
+    }
+
+    document.querySelector('.form__input').placeholder = langArr.form_input[currentLang];
 
     for (let key in langArr) {
       const element = document.querySelector(`.lng-${key}`);
       if (element) {
-        document.querySelector(`.lng-${key}`).textContent = langArr[key][hash];
+        document.querySelector(`.lng-${key}`).textContent = langArr[key][currentLang];
       };
     };
   };
 
-  dropDownInput.addEventListener('input', () => {
-    installURLLang();
-  });
-
+  dropDownInput.addEventListener('input', changeURLLang);
   installLang();
 };

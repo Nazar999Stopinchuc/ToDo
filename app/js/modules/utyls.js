@@ -76,3 +76,18 @@ export function dropDown() {
     });
   });
 };
+
+export function getCurrentDate() {
+  const currentDate = new Date();
+
+  return currentDate.toLocaleDateString();
+};
+
+export function formatNumber(num) {
+  if (typeof num === 'number' && num >= 0 && num < 10) {
+    return num < 10 ? '0' + num : num.toString();
+  } else {
+
+    return num.toString();
+  }
+}

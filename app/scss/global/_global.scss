@@ -44,8 +44,9 @@ body {
 .none {
   display: none !important;
 }
+
 .lock {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .bg {
@@ -55,4 +56,27 @@ body {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.inactive {
+  opacity: .6;
+}
+
+.today {
+  color: #fff;
+  position: relative;
+
+  &::before {
+    content: "";
+    background: #333;
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #000;
+    border-radius: 50%;
+    z-index: -1;
+  }
 }

@@ -1,12 +1,14 @@
-import { setTaskLocalStorage, getTaskLocalStorage, scrollToElement, showError, dropDown } from "./modules/utyls";
+import { setTaskLocalStorage, getTaskLocalStorage, scrollToElement, showError, dropDown, getCurrentDate } from "./modules/utyls";
 import { changeTheme } from "./modules/change_theme";
 import { burger } from "./modules/burger";
 import { changeLanguage } from "./modules/change_language";
 import { langArr, hash } from "./modules/global";
+import { initializeCalendar } from "./modules/initializeCalendar";
 
 const form = document.querySelector('#form');
 const buttonCancel = document.querySelector('.form__btn-cancele');
 const input = document.querySelector('#input');
+const dateInput = document.querySelector('#input-date');
 const tasksInner = document.querySelector('.to-do__inner')
 const tasksList = document.querySelector('.to-do__lict');
 const tasksListPinned = document.querySelector('.to-do__list-pinned');
@@ -15,9 +17,21 @@ const tasksListDone = document.querySelector('.to-do__list-done');
 let editId = null;
 let isEditTask = false;
 
+function setDate() {
+  const dateText = document.querySelector('.form-date__date');
 
+  if (dateInput.value.length == 0) {
+    dateText.textContent = `${langArr.date[hash]}: ${getCurrentDate()}`;
+  } else {
+    dateText.textContent = `${langArr.date[hash]}: ${dateInput.value}`;
+  }
 
+  dateInput.addEventListener('input', () => {
+    dateText.textContent = `${langArr.date[hash]}: ${dateInput.value}`;
+  });
 
+  return dateInput.value.length ? dateInput.value : getCurrentDate();
+}
 
 function addTask(e) {
   e.preventDefault();
@@ -39,6 +53,7 @@ function addTask(e) {
     task: task,
     done: false,
     pinned: false,
+    date: setDate(),
   });
 
   setTaskLocalStorage('tasks', arrFromLs);
@@ -186,12 +201,14 @@ function dragEndDrop() {
 
 function updatedTasks() {
   const tasksArr = getTaskLocalStorage('tasks');
+  const arrayFilterByDate = tasksArr.filter(obj => obj.date == setDate());
+
   tasksList.innerHTML = '';
   tasksListPinned.innerHTML = '';
   tasksListDone.innerHTML = '';
-  if (!tasksArr || !tasksArr.length) return;
+  if (!arrayFilterByDate || !arrayFilterByDate.length) return;
 
-  tasksArr.forEach((tasksItem) => {
+  arrayFilterByDate.forEach((tasksItem) => {
     const { id, task, done, pinned } = tasksItem;
 
     const item = `<li class="to-do__item ${done ? 'done' : ''} ${pinned ? 'pinned' : ''}" id="${id}" draggable="true">
@@ -259,10 +276,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  dateInput.addEventListener('input', updatedTasks);
+
+  setDate();
   updatedTasks();
   dragEndDrop();
+
   changeTheme();
   changeLanguage();
   burger();
   dropDown();
+  initializeCalendar(dateInput, updatedTasks, setDate);
 });
