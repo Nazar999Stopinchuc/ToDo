@@ -1,5 +1,4 @@
-import { formatNumber } from "./utyls";
-import { hash } from "./global";
+import { formatNumber, getCurrentLanguage } from "./utyls";
 
 export function initializeCalendar(dateInput, updateTasksCallback, setDateCallback) {
   const showCalendarBtn = document.querySelector('.form-date__btn');
@@ -128,7 +127,7 @@ export function initializeCalendar(dateInput, updateTasksCallback, setDateCallba
     }
 
     dates.innerHTML = datesHtml;
-    header.textContent = `${months[month][hash]} ${year}`;
+    header.textContent = `${months[month][getCurrentLanguage()]} ${year}`;
   }
 
   navs.forEach((nav) => {
@@ -156,6 +155,7 @@ export function initializeCalendar(dateInput, updateTasksCallback, setDateCallba
   showCalendarBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     calendar.classList.toggle('none');
+    renderCalendar();
   });
 
   dates.addEventListener('click', changeDate);
@@ -169,6 +169,4 @@ export function initializeCalendar(dateInput, updateTasksCallback, setDateCallba
       calendar.classList.add('none');
     }
   });
-
-  renderCalendar();
-}
+};

@@ -5,10 +5,13 @@ export const changeLanguage = () => {
   const dropDownInput = document.querySelector('#lang-input');
   let defaultLang = 'en';
 
-  function changeURLLang() {
+  if (!dropDownInput) {
+    console.error('Элемент #lang-input не найден.');
+    return;
+  }
+
+  function setLanguage() {
     let lang = dropDownInput.value;
-    location.hash = lang;
-    location.reload();
 
     setTaskLocalStorage('lang', lang);
     installLang();
@@ -18,10 +21,6 @@ export const changeLanguage = () => {
     let currentLang = getTaskLocalStorage('lang');
     
     if (!currentLang.length) currentLang = defaultLang;
-
-    if (!location.hash.slice(1)) {
-      location.hash = currentLang; 
-    }
 
     document.querySelector('.form__input').placeholder = langArr.form_input[currentLang];
 
@@ -33,6 +32,6 @@ export const changeLanguage = () => {
     };
   };
 
-  dropDownInput.addEventListener('input', changeURLLang);
+  dropDownInput.addEventListener('input', setLanguage);
   installLang();
 };

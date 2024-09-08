@@ -1,4 +1,3 @@
-export const hash = window.location.hash.slice(1);
 export const langArr = {
   'title': {
     en: 'To do list',
@@ -93,6 +92,12 @@ export const langArr = {
     ua: 'Щоб закріпити завдання, спершу зніміть галочку біля виконаного',
   },
 
+  'err_not_found': {
+    en: 'Task not found',
+    fr: 'Tâche non trouvée',
+    ua: 'Завдання не знайдено',
+  },
+
   'form_input': {
     en: 'Add item...',
     fr: 'Ajouter un article...',
@@ -100,9 +105,9 @@ export const langArr = {
   },
 
   'date': {
-    en: 'Date',
-    fr: 'Date',
-    ua: 'Дата',
+    en: 'Date:',
+    fr: 'Date:',
+    ua: 'Дата:',
   },
 
   'mo': {

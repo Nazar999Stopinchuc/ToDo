@@ -78,9 +78,12 @@ export function dropDown() {
 };
 
 export function getCurrentDate() {
-  const currentDate = new Date();
+  const today = new Date();
+  const day = String(today.getDate()).padStart(2, '0');
+  const month = String(today.getMonth() + 1).padStart(2, '0'); // Месяцы начинаются с 0
+  const year = today.getFullYear();
 
-  return currentDate.toLocaleDateString();
+  return `${day}.${month}.${year}`;
 };
 
 export function formatNumber(num) {
@@ -91,3 +94,12 @@ export function formatNumber(num) {
     return num.toString();
   }
 }
+
+export function getCurrentLanguage() {
+  let defaultLang = 'en';
+  let currentLang = getTaskLocalStorage('lang');
+
+  if (!currentLang.length) currentLang = defaultLang;
+
+  return currentLang;
+};

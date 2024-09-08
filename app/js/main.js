@@ -1,8 +1,8 @@
-import { setTaskLocalStorage, getTaskLocalStorage, scrollToElement, showError, dropDown, getCurrentDate } from "./modules/utyls";
+import { setTaskLocalStorage, getTaskLocalStorage, scrollToElement, showError, dropDown, getCurrentDate, getCurrentLanguage } from "./modules/utyls";
 import { changeTheme } from "./modules/change_theme";
 import { burger } from "./modules/burger";
 import { changeLanguage } from "./modules/change_language";
-import { langArr, hash } from "./modules/global";
+import { langArr } from "./modules/global";
 import { initializeCalendar } from "./modules/initializeCalendar";
 
 const form = document.querySelector('#form');
@@ -18,17 +18,13 @@ let editId = null;
 let isEditTask = false;
 
 function setDate() {
-  const dateText = document.querySelector('.form-date__date');
+  const dateText = document.querySelector('#date');
 
   if (dateInput.value.length == 0) {
-    dateText.textContent = `${langArr.date[hash]}: ${getCurrentDate()}`;
+    dateText.textContent = `${getCurrentDate()}`;
   } else {
-    dateText.textContent = `${langArr.date[hash]}: ${dateInput.value}`;
+    dateText.textContent = `${dateInput.value}`;
   }
-
-  dateInput.addEventListener('input', () => {
-    dateText.textContent = `${langArr.date[hash]}: ${dateInput.value}`;
-  });
 
   return dateInput.value.length ? dateInput.value : getCurrentDate();
 }
@@ -38,7 +34,7 @@ function addTask(e) {
   const task = input.value.trim().replace(/\s+/g, ' ');
 
   if (task == '' || task.split(' ').every(char => char === '')) {
-    showError(langArr.err_enter_task[hash]);
+    showError(langArr.err_enter_task[getCurrentLanguage()]);
     return;
   };
 
@@ -81,7 +77,7 @@ function doneTask(e) {
 
   const index = arrFromLS.findIndex(obj => obj.id === id);
 
-  if (index === -1) return showError(langArr.err_task_not_found[hash]);;
+  if (index === -1) return showError(langArr.err_task_not_found[getCurrentLanguage()]);;
 
   if (!arrFromLS[index].done && arrFromLS[index].pinned) {
     arrFromLS[index].pinned = false;
@@ -104,10 +100,10 @@ function pinnedTask(e) {
 
   const index = arrFromLS.findIndex(obj => obj.id === id);
 
-  if (index === -1) return showError(langArr.err_task_not_found[hash]);
+  if (index === -1) return showError(langArr.err_task_not_found[getCurrentLanguage()]);
 
   if (!arrFromLS[index].pinned && arrFromLS[index].done) {
-    return showError(langArr.err_pin_task[hash]);
+    return showError(langArr.err_pin_task[getCurrentLanguage()]);
   };
 
   if (arrFromLS[index].pinned) {
@@ -141,7 +137,7 @@ function saveEditTask(task) {
     setTaskLocalStorage('tasks', arrFromLS);
     updatedTasks();
   } else {
-    return showError(langArr.err_task_not_found[hash])
+    return showError(langArr.err_task_not_found[getCurrentLanguage()])
   };
 
   resrtSentForm();
@@ -185,7 +181,7 @@ function dragEndDrop() {
     const index = arrFromLS.findIndex(obj => obj.id === itemId);
 
     if (index === -1) {
-      showError('Task not found');
+      showError(langArr.err_not_found[getCurrentLanguage()]);
       return;
     }
     arrFromLS[index].pinned = false;
@@ -279,11 +275,10 @@ document.addEventListener('DOMContentLoaded', () => {
   dateInput.addEventListener('input', updatedTasks);
 
   setDate();
-  updatedTasks();
-  dragEndDrop();
-
   changeTheme();
   changeLanguage();
+  updatedTasks();
+  dragEndDrop();
   burger();
   dropDown();
   initializeCalendar(dateInput, updatedTasks, setDate);
